@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
-import { BASE_URL } from "../App";
-import { useNavigate } from "react-router-dom";
-import Loading from "../components/Loading";
 
 const ChangePassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -10,19 +7,7 @@ const ChangePassword = () => {
   const [pin, setPin] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
   const userId = JSON.parse(localStorage.getItem("userDetails")).id;
-
-  useEffect(() => {
-    const userDetails = localStorage.getItem("userDetails");
-    if (!userDetails) {
-      navigate("/login");
-    } else {
-      setLoading(false);
-    }
-  }, [navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +16,7 @@ const ChangePassword = () => {
       return;
     }
 
-    fetch(`${BASE_URL}/changePassword`, {
+    fetch("http://localhost:3000/changePassword", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,18 +42,6 @@ const ChangePassword = () => {
         setMessage("");
       });
   };
-
-  const handlePinChange = (e) => {
-    const pinValue = e.target.value;
-    // Hanya memperbarui pin jika input kosong atau berisi maksimal 3 angka
-    if (!pinValue || (pinValue.length <= 3 && /^\d*$/.test(pinValue))) {
-      setPin(pinValue);
-    }
-  };
-
-  if (loading) {
-    return <Loading />; // Tampilkan loading saat memeriksa
-  }
 
   return (
     <>
@@ -107,8 +80,7 @@ const ChangePassword = () => {
             <input
               type="password"
               value={pin}
-              onChange={handlePinChange}
-              maxLength="3"
+              onChange={(e) => setPin(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
             />
           </div>

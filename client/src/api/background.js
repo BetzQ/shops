@@ -1,4 +1,4 @@
-import { BASE_URL } from "../App";
+const BASE_URL = "http://localhost:3000";
 
 // Fetch Backgrounds
 export async function fetchBackgrounds() {

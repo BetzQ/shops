@@ -2,7 +2,6 @@ import { useState } from "react";
 import { formatCurrency } from "../utils/formatCurrency";
 import ModalEditProduct from "./ModalEditProduct";
 import { ModalBuyNow } from "./ModalBuyNow";
-import { BASE_URL } from "../App";
 
 /* eslint-disable react/prop-types */
 const CardBuyer = ({ product }) => {
@@ -27,7 +26,7 @@ const CardBuyer = ({ product }) => {
   };
 
   const imageUrl = product.image_url
-    ? `${BASE_URL}/public/images/${product.image_url}`
+    ? `http://localhost:3000/public/images/${product.image_url}`
     : "mutedBOX.gif";
 
   return (

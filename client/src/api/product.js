@@ -1,5 +1,5 @@
-import { BASE_URL } from "../App";
-
+// eslint-disable-next-line no-undef
+const BASE_URL = "http://localhost:3000";
 export async function fetchProducts() {
   try {
     const response = await fetch(`${BASE_URL}/product`);

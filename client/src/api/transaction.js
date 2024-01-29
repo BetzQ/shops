@@ -1,4 +1,5 @@
-import { BASE_URL } from "../App";
+// eslint-disable-next-line no-undef
+const BASE_URL = "http://localhost:3000";
 
 export async function purchaseProduct(product, quantity) {
   const user = JSON.parse(localStorage.getItem("userDetails"));

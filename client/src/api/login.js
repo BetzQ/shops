@@ -1,4 +1,5 @@
-import { BASE_URL } from "../App";
+/* eslint-disable no-undef */
+const BASE_URL = "http://localhost:3000";
 
 export async function login(username, password) {
   try {

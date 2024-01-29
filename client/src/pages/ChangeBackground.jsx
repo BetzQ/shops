@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { addBackground } from "../api/background"; // Import from your background.js
 import { Modal } from "../components/Modal";
 import Navbar from "../components/Navbar";
-import { useNavigate } from "react-router-dom";
-import Loading from "../components/Loading";
 
 const ChangeBackground = () => {
   const [file, setFile] = useState(null);
@@ -11,19 +9,6 @@ const ChangeBackground = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [operationSuccessful, setOperationSuccessful] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Cek role dari localStorage
-    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-    if (!userDetails || userDetails.role !== "admin") {
-      navigate("/"); // Redirect ke halaman utama jika bukan admin
-    } else {
-      setLoading(false); // Selesai loading jika pengguna adalah admin
-    }
-  }, [navigate]);
 
   useEffect(() => {
     if (file && file.type.startsWith("image/")) {
@@ -52,7 +37,13 @@ const ChangeBackground = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Here you can decide whether to call addBackground or updateBackground
+    // For example, using addBackground:
+
     try {
+      // const backgroundData = {
+      //   imageUrl: file, // Or however you handle image upload
+      // };
       await addBackground(file);
       setOperationSuccessful(true);
       setModalMessage("Background added/updated successfully");
@@ -83,10 +74,6 @@ const ChangeBackground = () => {
       />
     </div>
   ) : null;
-
-  if (loading) {
-    return <Loading />;
-  }
 
   return (
     <>

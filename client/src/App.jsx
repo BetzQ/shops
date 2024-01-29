@@ -8,19 +8,19 @@ import ChangePassword from "./pages/ChangePassword";
 import ChangeBackground from "./pages/ChangeBackground";
 import { useEffect, useState } from "react";
 
-export const BASE_URL = "https://cc2tzj5n-3000.asse.devtunnels.ms";
 // eslint-disable-next-line react/prop-types
 const RedBackgroundWrapper = ({ children }) => {
   const [backgroundImage, setBackgroundImage] = useState("");
+
   useEffect(() => {
     // Fungsi untuk memanggil API
     const fetchBackground = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/background`);
+        const response = await fetch("http://localhost:3000/background");
         const data = await response.json();
         if (data.length > 0) {
           setBackgroundImage(
-            `url(${BASE_URL}/public/background/${data[0].imageUrl})`
+            `url(http://localhost:3000/public/background/${data[0].imageUrl})`
           );
         }
       } catch (error) {
